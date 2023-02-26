@@ -1,0 +1,318 @@
+using System;
+using System.Collections.Generic;
+
+namespace MLEGASPINO
+{
+      internal   class Program
+    {
+		static List<string> destinationReserved = new List<string>(){"A", "B", "C", "a", "b", "c"};
+		public static string input, pn, seats;
+		
+        static void Main(string[] args)
+        {	
+			int l=300, b=400, r=450, payment, change;
+			 VanStation();
+			 Console.WriteLine("Enter: ");
+			 input= Console.ReadLine();
+			 
+	        	while(input != "X" || input != "x")
+				{
+					if (input == "X" || input == "x" )
+				{
+					Console.WriteLine("Thank you for choosing Michi's Van Station!");
+					break;
+				}
+				 switch(input)
+				 {
+					 
+				 case "1": 
+				 Console.WriteLine("----------------------------------------------");
+				 Console.WriteLine("|            RESERVATION FORM                |");
+				 Console.WriteLine("----------------------------------------------");
+				 DestinationPrice();
+			     Console.WriteLine("Enter Destination: ");
+				 input = Console.ReadLine();
+				 destinationReserved.Add(input);
+			
+				 
+				 if (input == "A" || input == "a")
+				 {
+					 Console.WriteLine("---------------------------------------------------------");
+					 Console.WriteLine("|         LIST OF AVAILABLE SEATS FOR LAGUNA            |");
+					 Console.WriteLine("---------------------------------------------------------");
+				     SeatList();
+					 Console.WriteLine("Enter Seat Code: ");
+				     seats = Console.ReadLine();
+					 
+					 switchseat(seats);
+					 Console.WriteLine("\n Congratulations, "+" (" + seats +") "+" Seat " + "Reserved Successfully! ");
+					 VanStation();
+			         input = GetUserInput();
+				 }
+				else if (input == "B" || input == "b")
+				 {
+					 Console.WriteLine("---------------------------------------------------------");
+					 Console.WriteLine("|         LIST OF AVAILABLE SEATS FOR BATANGAS          |");
+					 Console.WriteLine("---------------------------------------------------------");
+				     SeatList();
+					 Console.WriteLine("Enter Seat Code: ");
+				     seats = Console.ReadLine();
+				 
+				     switchseat(seats);
+					 Console.WriteLine("\n Congratulations, "+" (" + seats +") "+" Seat " + "Reserved Successfully! ");
+					 VanStation();
+			         input = GetUserInput();
+				 }
+				 
+				else if (input == "C"|| input == "c")
+				 {
+					 Console.WriteLine("---------------------------------------------------------");
+					 Console.WriteLine("|         LIST OF AVAILABLE SEATS FOR RIZAL             |");
+					 Console.WriteLine("---------------------------------------------------------");
+				     SeatList();
+				     Console.WriteLine("Enter Seat Code: ");
+				     seats = Console.ReadLine();
+				 
+				     switchseat(seats);
+					 Console.WriteLine("\n Congratulations, "+" (" + seats +") "+" Seat " + "Reserved Successfully! ");
+					 VanStation();
+			         input = GetUserInput();
+				 }
+				 else 
+				
+				 {
+				     Console.WriteLine("ERROR INPUT TRY AGAIN!");
+                     VanStation();
+			         input = GetUserInput();					
+				 }
+			     break;
+			 
+			     case "2":
+				 DestinationPrice();
+				 Console.WriteLine("Enter Destination: ");
+				 var destinationpl = Console.ReadLine();
+				 
+				 if (IsdestinationplExists(destinationpl))
+				 {
+				     Console.WriteLine("      | WELCOME TO THE PAYMENT FORM |         ");
+			         Console.WriteLine("----------------------------------------------");
+				     Console.WriteLine("|               PAYMENT FORM                 |");
+				     Console.WriteLine("----------------------------------------------");
+				     DestinationPrice();
+				     Console.WriteLine("Enter Destination to pay: ");
+				     input= Console.ReadLine();		
+			         Console.WriteLine("Enter payment: ");
+				     payment = Convert.ToInt32(Console.ReadLine());
+				 
+				  if (input == "A" || input == "a")
+				 {
+					 change = payment - l;
+					 Console.WriteLine("Your change is "+ change +", Welcome to Michi's Van Station!");
+				   
+					 VanStation();
+					 input = GetUserInput();
+				 }
+				  else if (input == "B" || input == "b")
+				 {
+					 change = payment - b;
+					 Console.WriteLine("Your change is "+ change +", Welcome to Michi's Van Station!");
+				     
+					 VanStation();
+					 input = GetUserInput();
+				 }
+				 else if(input == "C" || input == "c")
+				 {
+					 change = payment - r;
+					 Console.WriteLine("Your change is "+ change +", Welcome to Michi's Van Station!");
+					 
+					 VanStation();
+					 input = GetUserInput();
+				 }
+			}
+				 else 
+				 {
+					 Console.WriteLine(" Destination not found please try again!\n");
+					 VanStation();
+					 input = GetUserInput();
+				 }  
+			     break;
+				 
+			     case "3":
+				 Console.WriteLine("-----------------------------------------------");
+				 Console.WriteLine("|          CANCEL RESERVATION FORM            |");
+				 Console.WriteLine("-----------------------------------------------");
+				 DestinationPrice();
+			     Console.Write("Enter Destination to cancel: ");
+				 var destinationplRemove = Console.ReadLine();
+				 
+				 
+				 if(IsdestinationplExists(destinationplRemove))
+				 {
+					 destinationReserved.Remove(destinationplRemove);
+				     Console.WriteLine("\nReserved Destination successfully removed! \n ");
+					 
+			    	 VanStation();
+				     input = GetUserInput();
+				 }
+					 
+				 else 
+				 { 				 
+					
+					 Console.WriteLine("> Reserved Destination not found please try again!:");
+					 
+				     VanStation();
+			         input = GetUserInput();
+				 }	  
+		
+		         break;
+				 
+				 case "4":
+				 Console.Write("Enter passenger name:");
+				 pn = Console.ReadLine();
+			     Console.WriteLine("Where is your destination?:");
+			     DestinationPrice();
+			     input = Console.ReadLine();
+			     Console.WriteLine("---------------------------------------------------------");
+				 SeatList();
+				 Console.WriteLine("what is your Seat Code?:");
+				 seats = Console.ReadLine();
+					     
+	             if (input == "A" || input == "a")
+				 { 
+					 switchseat(seats);
+				     Console.WriteLine("\n Broomm," + pn + " your destination is " + input + " and your seat code is, " + seats + ".Welcome Aboard Have a Safe Trip!");
+					 VanStation();
+					 input = GetUserInput();
+				 }
+				 else if (input == "B" || input == "b")
+				 { 
+					 switchseat(seats);
+					 Console.WriteLine("\n Broomm," + pn + " your destination is " + input + " and your seat code is, " + seats + ".Welcome Aboard Have a Safe Trip!");
+					 VanStation();
+					 input = GetUserInput();
+				 } 
+                 else if (input == "C" || input == "c")
+				 { 
+					 switchseat(seats);
+					 Console.WriteLine("\n Broomm," + pn + " your destination is " + input + " and your seat code is, " + seats + ".Welcome Aboard Have a Safe Trip!");
+					 VanStation();
+				     input = GetUserInput();
+				 } 						  
+				 else 
+				 {
+				     Console.WriteLine("PLEASE, TRY AGAIN!! ");
+				     VanStation();
+				     input = GetUserInput();
+				 }
+				 break;
+			 }
+			 
+        }
+    }
+	
+             static void switchseat(string input)
+				 {
+					 switch (input)
+					 {
+						 case "S-1":
+						 case "S-2":
+						 Console.WriteLine("FRONT SEATS");
+						 break;
+
+                         case "S-3":
+						 case "S-4":
+						 case "S-5":
+						 Console.WriteLine("SECOND ROW");
+						 break;
+						 
+						 case "S-6":
+						 case "S-7":
+						 case "S-8":
+						 Console.WriteLine("THIRD ROW");
+						 break;
+						 
+						 case "S-9":
+						 case "S-10":
+						 case "S-11":
+						 Console.WriteLine("FOURTH ROW");
+						 break;
+						 
+						 case "S-12":
+						 case "S-13":
+						 case "S-14":
+						 Console.WriteLine("LAST ROW");
+						 break;
+						 
+						 case "A":
+						 Console.WriteLine("LAGUNA");
+						 break;
+						 
+						 case "B":
+						 Console.WriteLine("BATANGAS");
+						 break;
+						 
+						 case "C":
+						 Console.WriteLine("RIZAL");
+						 break;
+						 
+					 }
+				 }
+			 static void VanStation() // call method 
+			 {
+				 Console.WriteLine("----------------------------------------------------------");
+                 Console.WriteLine("|           WELCOME TO MICHI'S VAN STATION                |");
+	             Console.WriteLine("----------------------------------------------------------");
+			     Console.WriteLine("----------------------------------------------------------");
+		         Console.WriteLine("|               OUR VAN HAS 14 SEATS                      |");
+				 Console.WriteLine("----------------------------------------------------------");
+			     Console.WriteLine("ENTER 1 IF FOR RESERVATION (if new passenger)             |");
+			     Console.WriteLine("ENTER 2 IF FOR PAYMENT   (if already a passenger)         |");
+			     Console.WriteLine("ENTER 3 IF FOR CANCEL RESERVATION(if already a passenger) | ");
+			     Console.WriteLine("ENTER 4 IF FOR ABOARD (if already a passenger)            |");
+			     Console.WriteLine("ENTER X IF FOR EXIT                                       |");
+			     Console.WriteLine("__________________________________________________________");
+				 
+			 } 
+			 static void SeatList()
+			 {    
+				 Console.WriteLine("|        S-1, S-2,         | (FRONT SEATS)              |");
+				 Console.WriteLine("|        S-3, S-4, S-5     | (SECOND ROW)               |");
+		    	 Console.WriteLine("|        S-6, S-7, S-8     | (THIRD ROW)                |");
+				 Console.WriteLine("|        S-9, S-10, S-11   | (FOURTH ROW)               |");
+				 Console.WriteLine("|        S-12, S-13, S-14  | (LAST ROW)                 |");
+				 Console.WriteLine("---------------------------------------------------------");
+			 }
+			 static string GetUserInput()
+			 {
+				 Console.Write("Enter: ");
+				 string userinput = Console.ReadLine();
+				 
+				 return userinput;
+				 
+			 }
+			static void DestinationPrice()
+			{
+				 Console.WriteLine("----------------------------------------------");
+				 Console.WriteLine("----------DESTINATION-----------PRICE---------");
+				 Console.WriteLine("----------------------------------------------");
+			     Console.WriteLine("| ENTER A IF LAGUNA    |         300         |");
+			     Console.WriteLine("| ENTER B IF BATANGAS  |         400         |");
+			     Console.WriteLine("| ENTER C IF RIZAL     |         450         |");
+				 Console.WriteLine("----------------------------------------------");
+			}
+			static bool IsdestinationplExists(string destinationplReserved)
+				{
+					int found = destinationReserved.IndexOf(destinationplReserved);
+					
+					if (found == -1)
+					{
+						return false;
+					}
+					else 
+					{
+						return true;
+					}
+				}
+				 
+	}
+}
